@@ -1,0 +1,163 @@
+/* ============================================================
+   tuxedo — design tokens
+   Dark  = "phosphor" — matrix/CRT/terminal
+   Light = "oxford"  — editorial: cream paper, deep blue, serif body
+   ============================================================ */
+
+:root {
+  /* ── typography ──────────────────────────────────────────── */
+  --tux-font-mono:    "Fira Code", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --tux-font-serif:   "Newsreader", Georgia, "Times New Roman", serif;
+  --tux-font-display: var(--tux-font-mono);
+
+  /* size scale — base 14.5px for comfortable mono reading */
+  --tux-text-xs:   0.75rem;      /* 12px  */
+  --tux-text-sm:   0.8125rem;    /* 13px  */
+  --tux-text-base: 0.90625rem;   /* 14.5px */
+  --tux-text-md:   0.9375rem;    /* 15px  */
+  --tux-text-lg:   1.0625rem;    /* 17px  */
+  --tux-text-xl:   1.25rem;      /* 20px  */
+  --tux-text-2xl:  1.625rem;     /* 26px  */
+  --tux-text-3xl:  2.125rem;     /* 34px  */
+  --tux-text-4xl:  3rem;         /* 48px  */
+  --tux-text-5xl:  4rem;         /* 64px  */
+
+  --tux-leading-tight:  1.15;
+  --tux-leading-snug:   1.35;
+  --tux-leading-normal: 1.75;    /* generous — fights mono density */
+
+  --tux-weight-regular:  400;
+  --tux-weight-medium:   500;
+  --tux-weight-semibold: 600;
+  --tux-weight-bold:     700;
+
+  --tux-tracking-tight:   -0.01em;
+  --tux-tracking-normal:   0;
+  --tux-tracking-wide:     0.04em;
+  --tux-tracking-wider:    0.08em;
+  --tux-tracking-widest:   0.16em;
+
+  /* ── spacing (4px base) ──────────────────────────────────── */
+  --tux-space-0:  0;
+  --tux-space-1:  0.25rem;
+  --tux-space-2:  0.5rem;
+  --tux-space-3:  0.75rem;
+  --tux-space-4:  1rem;
+  --tux-space-5:  1.25rem;
+  --tux-space-6:  1.5rem;
+  --tux-space-8:  2rem;
+  --tux-space-10: 2.5rem;
+  --tux-space-12: 3rem;
+  --tux-space-16: 4rem;
+  --tux-space-20: 5rem;
+  --tux-space-24: 6rem;
+
+  /* ── radii ───────────────────────────────────────────────── */
+  --tux-radius-none: 0;
+  --tux-radius-xs:   2px;
+  --tux-radius-sm:   4px;
+  --tux-radius-md:   6px;
+  --tux-radius-lg:   10px;
+  --tux-radius-full: 9999px;
+
+  /* ── motion ──────────────────────────────────────────────── */
+  --tux-duration-fast: 120ms;
+  --tux-duration-base: 220ms;
+  --tux-duration-slow: 400ms;
+  --tux-ease:          cubic-bezier(0.4, 0, 0.2, 1);
+  --tux-ease-out:      cubic-bezier(0.2, 0.9, 0.3, 1);
+
+  /* ── z ───────────────────────────────────────────────────── */
+  --tux-z-base:     0;
+  --tux-z-elevated: 10;
+  --tux-z-nav:      100;
+  --tux-z-overlay:  500;
+  --tux-z-modal:    900;
+  --tux-z-toast:    1000;
+}
+
+/* ============================================================
+   DARK — "phosphor CRT"
+   Default when no theme attribute, or [data-theme="dark"]
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* backgrounds — near-black, slightly lifted (never pure #000) */
+  --tux-bg:          #07090a;
+  --tux-surface-1:   #0e1114;
+  --tux-surface-2:   #161a1e;
+  --tux-surface-3:   #1f2428;
+
+  /* foregrounds — NEUTRAL warm white, no green tint */
+  --tux-fg:          #e6e9ec;
+  --tux-fg-muted:    #9aa4ae;
+  --tux-fg-subtle:   #5b656f;
+
+  /* borders */
+  --tux-border:         #1f2428;
+  --tux-border-strong:  #2a3138;
+
+  /* accent = phosphor green — reserved for interactive/active */
+  --tux-accent:         #00ff9c;  /* phosphor — dark-mode accent */
+  --tux-accent-soft:    rgba(0, 255, 156, 0.12);
+  --tux-accent-strong:  #00d684;
+  --tux-accent-dim:     #008a55;
+
+  /* semantic */
+  --tux-success: #00ff9c;
+  --tux-danger:  #ff4d5e;
+  --tux-warn:    #ffb84d;
+  --tux-info:    #5dc8ff;
+
+  /* glow — only used on accent surfaces */
+  --tux-glow-sm: 0 0 8px rgba(0, 255, 156, 0.40);
+  --tux-glow-md: 0 0 16px rgba(0, 255, 156, 0.50), 0 0 40px rgba(0, 255, 156, 0.15);
+  --tux-glow-lg: 0 0 24px rgba(0, 255, 156, 0.70), 0 0 70px rgba(0, 255, 156, 0.25);
+
+  /* CRT overlay — tune intensity */
+  --tux-scanline-op: 0.10;
+  --tux-vignette-op: 0.45;
+
+  /* body font in dark = mono */
+  --tux-font-body: var(--tux-font-mono);
+}
+
+/* ============================================================
+   LIGHT — "oxford"
+   Editorial: cream paper · near-black ink · deep blue accent · serif body
+   ============================================================ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --tux-bg:          #f5f1e8;   /* warm cream paper */
+  --tux-surface-1:   #efeadd;
+  --tux-surface-2:   #e7e0cf;
+  --tux-surface-3:   #dcd4c0;
+
+  --tux-fg:          #0b0d10;   /* near-black ink */
+  --tux-fg-muted:    #555c66;
+  --tux-fg-subtle:   #8a8577;
+
+  --tux-border:         #d4ccb8;
+  --tux-border-strong:  #a89e86;
+
+  --tux-accent:         #177b57; /* forest — editorial accent */
+  --tux-accent-soft:    rgba(23, 123, 87, 0.08);
+  --tux-accent-strong:  #0f5a3f;
+  --tux-accent-dim:     #a2c4b3;
+
+  --tux-success: #0a7a3b;
+  --tux-danger:  #b12437;
+  --tux-warn:    #a06a00;
+  --tux-info:    #1e5f9e;
+
+  /* no glow in editorial mode — it'd feel out of place */
+  --tux-glow-sm: 0 1px 2px rgba(23, 123, 87, 0.14);
+  --tux-glow-md: 0 2px 8px rgba(23, 123, 87, 0.18);
+  --tux-glow-lg: 0 4px 20px rgba(23, 123, 87, 0.22);
+
+  /* body font in light = serif for long-form reading */
+  --tux-font-body: var(--tux-font-serif);
+}

@@ -1,0 +1,99 @@
+/* ── Terminal (live REPL) ────────────────────────────────── */
+
+.tx-term {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tux-bg);
+  color: var(--tux-fg);
+  font-family: var(--tux-font-mono);
+  font-size: var(--tux-text-sm);
+  line-height: 1.65;
+  height: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  cursor: text;
+}
+
+.tx-term__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--tux-space-4) var(--tux-space-5);
+  scroll-behavior: smooth;
+}
+
+.tx-term__scroll::-webkit-scrollbar { width: 10px; }
+.tx-term__scroll::-webkit-scrollbar-track { background: transparent; }
+.tx-term__scroll::-webkit-scrollbar-thumb {
+  background: var(--tux-border-strong);
+  border-radius: var(--tux-radius-full);
+}
+
+.tx-term__line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+.tx-term__line + .tx-term__line { margin-top: 2px; }
+
+.tx-term__line--error { color: var(--tux-danger); }
+
+.tx-term__echo {
+  display: flex;
+  gap: var(--tux-space-2);
+  color: var(--tux-fg);
+}
+.tx-term__ps {
+  color: var(--tux-accent);
+  text-shadow: var(--tux-glow-sm);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.tx-term__inputline {
+  display: flex;
+  align-items: baseline;
+  gap: var(--tux-space-2);
+  margin-top: 2px;
+}
+
+.tx-term__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--tux-fg);
+  font-family: var(--tux-font-mono);
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  caret-color: var(--tux-accent);
+}
+.tx-term__input::placeholder { color: var(--tux-fg-subtle); }
+
+/* misc content styles the commands use */
+.tx-term__dim       { color: var(--tux-fg-muted); }
+.tx-term__hi        { color: var(--tux-accent); font-weight: var(--tux-weight-bold); letter-spacing: var(--tux-tracking-wide); }
+.tx-term__helplist  { margin-top: 4px; display: grid; grid-template-columns: 1fr; gap: 0; }
+.tx-term__helprow   { display: flex; gap: var(--tux-space-2); }
+.tx-term__helpname  { color: var(--tux-accent); white-space: pre; }
+.tx-term__helpdesc  { color: var(--tux-fg-muted); }
+.tx-term__banner    {
+  color: var(--tux-accent);
+  text-shadow: var(--tux-glow-sm);
+  font-size: var(--tux-text-xs);
+  line-height: 1.25;
+  margin: 0;
+}
+.tx-term__complete  { color: var(--tux-fg-muted); }
+
+/* oxford — editorial: no green, no glow */
+[data-theme="light"] .tx-term__ps,
+[data-theme="light"] .tx-term__hi,
+[data-theme="light"] .tx-term__helpname,
+[data-theme="light"] .tx-term__banner {
+  color: var(--tux-accent);
+  text-shadow: none;
+}

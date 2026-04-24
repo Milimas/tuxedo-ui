@@ -1,0 +1,50 @@
+{
+  "name": "tuxedo-ui",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A dual-mode design system. Dark = phosphor CRT terminal. Light = oxford editorial. Ships with a real, functional terminal REPL component.",
+  "keywords": [
+    "design-system",
+    "react",
+    "terminal",
+    "repl",
+    "tui",
+    "crt",
+    "matrix",
+    "editorial"
+  ],
+  "license": "MIT",
+  "author": "Amine Beihaqi",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.5.0"
+  }
+}

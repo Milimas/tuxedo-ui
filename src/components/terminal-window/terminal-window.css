@@ -1,0 +1,86 @@
+/* ── TerminalWindow ──────────────────────────────────────────
+   The classic macOS-dot chrome, styled for both themes.
+   Body has no internal padding by default — compose freely.
+   ────────────────────────────────────────────────────────── */
+
+.tx-tw {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tux-surface-1);
+  border: 1px solid var(--tux-border);
+  border-radius: var(--tux-radius-sm);
+  overflow: hidden;
+  font-family: var(--tux-font-mono);
+  color: var(--tux-fg);
+  transition:
+    border-color var(--tux-duration-base) var(--tux-ease),
+    box-shadow   var(--tux-duration-base) var(--tux-ease);
+}
+
+.tx-tw:hover {
+  border-color: var(--tux-border-strong);
+}
+
+.tx-tw__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--tux-space-3);
+  padding: 8px 12px;
+  background: var(--tux-surface-2);
+  border-bottom: 1px solid var(--tux-border);
+  user-select: none;
+  font-size: var(--tux-text-xs);
+  color: var(--tux-fg-subtle);
+  letter-spacing: var(--tux-tracking-wide);
+}
+
+.tx-tw__dots {
+  display: inline-flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tx-tw__dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: var(--tux-radius-full);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.tx-tw__dot--r { background: #ff5f57; }
+.tx-tw__dot--y { background: #febc2e; }
+.tx-tw__dot--g { background: #28c93f; }
+
+.tx-tw__title {
+  flex: 1;
+  text-align: center;
+  letter-spacing: var(--tux-tracking-wider);
+  font-size: var(--tux-text-xs);
+  color: var(--tux-fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-tw__bar-extra {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tux-space-2);
+}
+
+.tx-tw__body {
+  flex: 1;
+  min-height: 0;
+  background: var(--tux-surface-1);
+  color: var(--tux-fg);
+}
+
+/* oxford mode — softer paper-on-paper surfaces, dots stay recognizable */
+[data-theme="light"] .tx-tw {
+  background: var(--tux-surface-1);
+}
+[data-theme="light"] .tx-tw__bar {
+  background: var(--tux-surface-2);
+}

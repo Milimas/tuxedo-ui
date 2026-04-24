@@ -1,0 +1,56 @@
+/* ── CRT overlay ────────────────────────────────────────────
+   Full-viewport fixed overlay. Purely decorative —
+   click-through, aria-hidden. Dark mode only by default.
+   ────────────────────────────────────────────────────────── */
+
+.tx-crt {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  contain: strict;
+}
+
+.tx-crt__scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0, 0, 0, var(--tux-scanline-op, 0.10)) 3px,
+    rgba(0, 0, 0, var(--tux-scanline-op, 0.10)) 4px
+  );
+}
+
+.tx-crt__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, var(--tux-vignette-op, 0.45)) 100%
+  );
+}
+
+.tx-crt__flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 156, 0.015);
+  animation: tx-crt-flicker 140ms steps(2, end) infinite;
+}
+
+@keyframes tx-crt-flicker {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.96; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-crt__flicker { animation: none; opacity: 1; }
+}
+
+/* hide in oxford/light by default; opt in via tx-crt--both-modes */
+[data-theme="light"] .tx-crt:not(.tx-crt--both-modes) { display: none; }
+
+/* runtime kill-switch — set data-crt="off" on <html> */
+[data-crt="off"] .tx-crt { display: none; }
