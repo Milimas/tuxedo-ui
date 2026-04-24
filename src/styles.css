@@ -6,3 +6,6 @@
 @import "./components/terminal-window/terminal-window.css";
 @import "./components/terminal/terminal.css";
 @import "./components/crt/crt.css";
+@import "./components/card/card.css";
+@import "./components/glitch/glitch.css";
+@import "./components/section-title/section-title.css";

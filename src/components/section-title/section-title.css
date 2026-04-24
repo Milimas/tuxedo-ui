@@ -1,0 +1,43 @@
+/* ── SectionTitle ────────────────────────────────────────
+   The recurring "[01.]  [NAME]  [─────]" pattern lifted
+   out of the docs template as a real, composable block.
+   ────────────────────────────────────────────────────── */
+
+.tx-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--tux-space-3);
+  font-family: var(--tux-font-mono);
+}
+
+.tx-section-title__num {
+  color: var(--tux-accent);
+  font-size: var(--tux-text-xs);
+  letter-spacing: var(--tux-tracking-widest);
+  text-shadow: var(--tux-glow-sm);
+  flex-shrink: 0;
+}
+[data-theme="light"] .tx-section-title__num { text-shadow: none; }
+
+.tx-section-title__text {
+  font-size: var(--tux-text-xl);
+  font-weight: var(--tux-weight-bold);
+  margin: 0;
+  letter-spacing: var(--tux-tracking-wide);
+  color: var(--tux-fg);
+  flex-shrink: 0;
+}
+
+.tx-section-title__aside {
+  font-family: var(--tux-font-mono);
+  color: var(--tux-fg-subtle);
+  font-size: var(--tux-text-sm);
+  font-weight: var(--tux-weight-regular);
+  flex-shrink: 0;
+}
+
+.tx-section-title__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--tux-border-strong), transparent);
+}

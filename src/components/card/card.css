@@ -1,0 +1,192 @@
+/* ── Card ───────────────────────────────────────────────────
+   Compound: Card + Card.Header/Body/Footer + Card.Corners + Card.Grid
+   Variants: plain (static), hover (lift + glow), framed (= hover
+             + stronger border feel)
+   ────────────────────────────────────────────────────────── */
+
+.tx-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tux-surface-1);
+  border: 1px solid var(--tux-border);
+  color: var(--tux-fg);
+  font-family: var(--tux-font-mono);
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform    var(--tux-duration-base) var(--tux-ease),
+    border-color var(--tux-duration-base) var(--tux-ease),
+    box-shadow   var(--tux-duration-base) var(--tux-ease);
+}
+
+.tx-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--tux-accent-soft) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--tux-duration-slow) var(--tux-ease);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── variant: hover ─────────────────────────────────────── */
+.tx-card--hover { cursor: pointer; }
+.tx-card--hover:hover {
+  border-color: var(--tux-border-strong);
+  box-shadow: var(--tux-glow-md);
+  transform: translateY(-4px);
+}
+.tx-card--hover:hover::before { opacity: 1; }
+.tx-card--hover:hover .tx-card__corner { opacity: 1; }
+.tx-card--hover:hover .tx-card__grid   { opacity: 0.9; }
+
+/* ── variant: framed — always shows subtle corners + grid ─ */
+.tx-card--framed { cursor: pointer; }
+.tx-card--framed .tx-card__corner { opacity: 0.4; }
+.tx-card--framed .tx-card__grid   { opacity: 0.5; }
+.tx-card--framed:hover {
+  border-color: var(--tux-accent);
+  box-shadow: var(--tux-glow-lg);
+  transform: translateY(-4px);
+}
+.tx-card--framed:hover::before    { opacity: 1; }
+.tx-card--framed:hover .tx-card__corner { opacity: 1; }
+.tx-card--framed:hover .tx-card__grid   { opacity: 1; }
+
+/* ── slots ──────────────────────────────────────────────── */
+.tx-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tux-space-3);
+  padding: var(--tux-space-3) var(--tux-space-4);
+  color: var(--tux-fg-muted);
+  font-size: var(--tux-text-xs);
+  letter-spacing: var(--tux-tracking-wide);
+  transition: color var(--tux-duration-base) var(--tux-ease);
+  position: relative;
+  z-index: 1;
+}
+.tx-card--hover:hover  .tx-card__header,
+.tx-card--framed:hover .tx-card__header { color: var(--tux-accent); }
+
+.tx-card__body {
+  padding: var(--tux-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--tux-space-2);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+.tx-card__title {
+  font-size: var(--tux-text-lg);
+  font-weight: var(--tux-weight-bold);
+  color: var(--tux-fg);
+  transition: color var(--tux-duration-base) var(--tux-ease),
+              text-shadow var(--tux-duration-base) var(--tux-ease);
+}
+.tx-card--hover:hover  .tx-card__title,
+.tx-card--framed:hover .tx-card__title {
+  color: var(--tux-accent);
+  text-shadow: var(--tux-glow-sm);
+}
+[data-theme="light"] .tx-card--hover:hover  .tx-card__title,
+[data-theme="light"] .tx-card--framed:hover .tx-card__title { text-shadow: none; }
+
+.tx-card__text {
+  font-size: var(--tux-text-sm);
+  color: var(--tux-fg-muted);
+  line-height: 1.6;
+}
+
+.tx-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--tux-space-3);
+  padding: var(--tux-space-3) var(--tux-space-4);
+  color: var(--tux-fg-subtle);
+  font-size: var(--tux-text-xs);
+  letter-spacing: var(--tux-tracking-wide);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── decorations ────────────────────────────────────────── */
+.tx-card__corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.tx-card__corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity var(--tux-duration-base) var(--tux-ease);
+}
+.tx-card__corner--tl { top: 8px;    left: 8px;    border-top: 1px solid var(--tux-accent);    border-left:  1px solid var(--tux-accent); }
+.tx-card__corner--tr { top: 8px;    right: 8px;   border-top: 1px solid var(--tux-accent);    border-right: 1px solid var(--tux-accent); }
+.tx-card__corner--bl { bottom: 8px; left: 8px;    border-bottom: 1px solid var(--tux-accent); border-left:  1px solid var(--tux-accent); }
+.tx-card__corner--br { bottom: 8px; right: 8px;   border-bottom: 1px solid var(--tux-accent); border-right: 1px solid var(--tux-accent); }
+
+.tx-card__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background-image:
+    linear-gradient(var(--tux-accent-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tux-accent-soft) 1px, transparent 1px);
+  background-size: 36px 36px;
+  transition: opacity var(--tux-duration-slow) var(--tux-ease);
+}
+
+/* ── tilt modifier ─────────────────────────────────────
+   Pointer-tracked rotateX/Y + cursor-following sheen.
+   JS drives the transform; CSS handles the ease-back
+   on pointer leave and the sheen opacity + position.
+   ────────────────────────────────────────────────── */
+.tx-card--tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform    var(--tux-duration-slow) var(--tux-ease-out),
+    border-color var(--tux-duration-base) var(--tux-ease),
+    box-shadow   var(--tux-duration-base) var(--tux-ease);
+}
+.tx-card--tilt[data-tilt-active="true"] {
+  transition-duration: 60ms; /* snappy while tracking */
+}
+
+.tx-card__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity var(--tux-duration-base) var(--tux-ease);
+  background: radial-gradient(
+    circle at var(--tx-mx, 50%) var(--tx-my, 50%),
+    var(--tux-accent-soft) 0%,
+    transparent 42%
+  );
+  mix-blend-mode: screen;
+}
+.tx-card--tilt[data-tilt-active="true"] .tx-card__sheen { opacity: 1; }
+
+/* oxford mode — keep tilt, drop the screen blend + sheen (looks wrong on paper) */
+[data-theme="light"] .tx-card__sheen { mix-blend-mode: normal; opacity: 0 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-card--tilt { transform: none !important; transition: none; }
+  .tx-card__sheen { display: none; }
+}

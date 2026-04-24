@@ -20,4 +20,22 @@ export type {
 export { CRT } from "./components/crt";
 export type { CRTProps } from "./components/crt";
 
+export {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  CardText,
+  CardCorners,
+  CardGrid,
+} from "./components/card";
+export type { CardProps, CardVariant } from "./components/card";
+
+export { Glitch } from "./components/glitch";
+export type { GlitchProps } from "./components/glitch";
+
+export { SectionTitle } from "./components/section-title";
+export type { SectionTitleProps } from "./components/section-title";
+
 export { cn } from "./lib/cn";

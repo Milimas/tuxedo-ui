@@ -1,0 +1,56 @@
+/* ── Glitch text ─────────────────────────────────────────
+   Renders the same text in cyan (top slice) and magenta
+   (bottom slice), with a periodic RGB-shift stutter.
+   Respects prefers-reduced-motion. Disabled in oxford.
+   ────────────────────────────────────────────────────── */
+
+.tx-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.tx-glitch::before,
+.tx-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tx-glitch::before {
+  left: 2px;
+  color: #00e5ff;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  opacity: 0;
+  animation: tx-glitch-top 6s infinite steps(1, end);
+}
+.tx-glitch::after {
+  left: -2px;
+  color: #ff006e;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  opacity: 0;
+  animation: tx-glitch-bottom 6s infinite steps(1, end);
+}
+
+@keyframes tx-glitch-top {
+  0%, 88%, 100% { opacity: 0; transform: translate(0, 0); }
+  89%           { opacity: 0.85; transform: translate(-3px, 0); }
+  91%           { opacity: 0.85; transform: translate(3px, 0); }
+  93%           { opacity: 0; }
+}
+@keyframes tx-glitch-bottom {
+  0%, 84%, 100% { opacity: 0; transform: translate(0, 0); }
+  86%           { opacity: 0.85; transform: translate(3px, 0); }
+  89%           { opacity: 0.85; transform: translate(-3px, 0); }
+  92%           { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-glitch::before,
+  .tx-glitch::after { animation: none; opacity: 0; }
+}
+
+/* oxford — glitch is a CRT-era tic; hide it on paper */
+[data-theme="light"] .tx-glitch::before,
+[data-theme="light"] .tx-glitch::after { display: none; }
